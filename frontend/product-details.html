@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Producto - Distortion</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="sticky-header">
+        <nav>
+            <a href="home.html" class="logo">Distortion</a>
+            <ul class="nav-links">
+                <li><a href="catalog_guitars.html">Guitarras</a></li>
+                <li><a href="catalog_basses.html">Bajos</a></li>
+                <li><a href="featured.html">Artistas</a></li>
+                <li><a href="about.html">Acerca de</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn btn-secondary">Iniciar sesión</button>
+                
+            </div>
+            <button class="menu-toggle" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="product-details" class="product-details">
+        <!-- El contenido se cargará dinámicamente aquí -->
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Distortion. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="js/product-details.js"></script>
+    <script src="js/product-details.js"></script>
+    <script>
+    // Este pinche script es para ver el estado de login
+  const email = localStorage.getItem('email');
+
+  if (email) {
+    const nav = document.querySelector('.nav-buttons');
+    const userIcon = document.createElement('a');
+    userIcon.href = 'cuenta.html'; // crea esta página si quieres
+    userIcon.innerHTML = `👤 ${email}`;
+    userIcon.classList.add('user-icon');
+    nav.appendChild(userIcon);
+  }
+</script>
+</body>
+</html>

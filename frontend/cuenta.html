@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi Cuenta - Distortion</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="sticky-header">
+    <nav>
+      <a href="home.html" class="logo">Distortion</a>
+      <ul class="nav-links">
+        <li><a href="catalog_guitars.html">Guitarras</a></li>
+        <li><a href="catalog_basses.html">Bajos</a></li>
+        <li><a href="featured.html">Artistas</a></li>
+        <li><a href="about.html">Acerca de</a></li>
+      </ul>
+      <div class="nav-buttons">
+        <!-- Aquí aparecerá el ícono de usuario si está logueado -->
+      </div>
+    </nav>
+  </header>
+
+  <main class="account-page">
+    <!-- Aquí aparecerán los favoritos agregados -->
+<section id="favoritos-section">
+   <h2>Mis Favoritos</h2>
+ <section id="favoritos-container" class="favoritos-grid"></section>
+
+</section>
+
+
+
+    <h2>Mi Cuenta</h2>
+    <div id="user-info"></div>
+    <button id="logout-btn" class="btn btn-secondary">Cerrar Sesión</button>
+  </main>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const favoritosContainer = document.getElementById('favoritos-container');
+    let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+
+    if (favoritos.length === 0) {
+      favoritosContainer.innerHTML = '<p>No hay favoritos aún.</p>';
+      return;
+    }
+
+    favoritos.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'fav-card';
+      card.innerHTML = `
+        <img src="${item.imagen}" alt="${item.nombre}">
+        <div class="fav-info">
+          <h3>${item.nombre}</h3>
+          <p>Marca: ${item.marca}</p>
+          <p>Cuerdas: ${item.cuerdas}</p>
+          <button class="btn-remove-fav" data-id="${item.id}">Eliminar</button>
+        </div>
+      `;
+      favoritosContainer.appendChild(card);
+    });
+
+    // 💥 Este bloque va DENTRO del DOMContentLoaded
+    favoritosContainer.addEventListener('click', (e) => {
+      if (e.target.classList.contains('btn-remove-fav')) {
+        const idToRemove = e.target.dataset.id;
+
+        // Actualizamos el array de favoritos
+        favoritos = favoritos.filter(fav => fav.id !== idToRemove);
+
+        // Guardamos el nuevo array
+        localStorage.setItem('favoritos', JSON.stringify(favoritos));
+
+        // Volvemos a cargar la vista
+        location.reload();
+      }
+    });
+  });
+</script>
+
+
+</script>
+
+
+</body>
+</html>

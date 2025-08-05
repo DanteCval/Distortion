@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="img/icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Guitarras - Distortion</title>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    <header class="sticky-header">
+        <nav>
+            <a href="home.html" class="logo">Distortion</a>
+            <ul class="nav-links">
+                <li><a href="catalog_guitars.html">Guitarras</a></li>
+                <li><a href="catalog_basses.html">Bajos</a></li>
+                <li><a href="featured.html">Artistas</a></li>
+                <li><a href="about.html">Acerca de</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn btn-secondary">Iniciar sesión</button>
+                
+            </div>
+            <button class="menu-toggle" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="catalog-page">
+        <div class="catalog-header">
+            <img src="img/top_catalog_guitars.jpg" alt="Colección de guitarras" class="catalog-header-image">
+            <h1>G U I T A R R A S</h1>
+        </div>
+        
+        <div class="catalog-layout">
+            <aside class="filters">
+                <h2>Filtros</h2>
+                <div class="filter-group">
+                    <h3>Marca</h3>
+                    <label><input type="checkbox" name="brand" value="Fender"> Fender</label>
+                    <label><input type="checkbox" name="brand" value="Gibson"> Gibson</label>
+                    <label><input type="checkbox" name="brand" value="Ibanez"> Ibanez</label>
+                    <label><input type="checkbox" name="brand" value="PRS"> PRS</label>
+                    <label><input type="checkbox" name="brand" value="ESP"> ESP</label>
+
+                </div>
+                <div class="filter-group">
+                    <h3>Número de cuerdas</h3>
+                    <label><input type="checkbox" name="strings" value="6"> 6 cuerdas</label>
+                    <label><input type="checkbox" name="strings" value="7"> 7 cuerdas</label>
+                    <label><input type="checkbox" name="strings" value="8"> 8 cuerdas</label>
+                </div>
+                <div class="filter-group">
+                    <h3>Tipo</h3>
+                    <label><input type="checkbox" name="type" value="electric"> Eléctrica</label>
+                    <label><input type="checkbox" name="type" value="acoustic"> Acústica</label>
+                    <label><input type="checkbox" name="type" value="signature"> Signature</label>
+                </div>
+                <button id="apply-filters" class="btn btn-primary">Aplicar filtros</button>
+            </aside>
+            
+            <section class="guitar-grid">
+                <!-- Las tarjetas de guitarras se generarán dinámicamente con JavaScript -->
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Distortion. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="js/catalog.js"></script>
+    <script>
+    // Este pinche script es para ver el estado de login
+  const email = localStorage.getItem('email');
+
+  if (email) {
+    const nav = document.querySelector('.nav-buttons');
+    const userIcon = document.createElement('a');
+    userIcon.href = 'cuenta.html'; // crea esta página si quieres
+    userIcon.innerHTML = `👤 ${email}`;
+    userIcon.classList.add('user-icon');
+    nav.appendChild(userIcon);
+  }
+</script>
+</body>
+</html>

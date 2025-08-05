@@ -1,0 +1,1066 @@
+/* Importación de fuentes desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Oswald:wght@700&display=swap');
+
+:root {
+    --primary-color: #ff3e00;
+    --secondary-color: #ff3300e0;
+    --text-color: #333;
+    --background-color: #f4f4f4;
+    --heading-font: 'Oswald', sans-serif;
+    --body-font: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--body-font);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
+}
+
+/*botones de slider inicio*/
+
+button {
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+    background-color: #ff3300e0; /* Color naranja */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff3300e0; /* Un tono más oscuro de naranja al hacer hover */
+}
+
+/* Estilos adicionales para los botones dentro de los slides */
+.slider .slide button {
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+/* Asegurarse de que el texto dentro de los botones esté en mayúsculas */
+button {
+    text-transform: uppercase;
+}
+
+.sticky-header {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color); /* Color del logo */
+    font-family: var(--heading-font);
+    text-decoration: none; /* Si no deseas subrayado */
+}
+
+.logo:visited {
+    color: var(--primary-color); /* Asegura que el color no cambie después de hacer clic */
+}
+
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 1rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-color);
+}
+
+.slider {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    background-color: rgba(0,0,0,0.5);
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255,255,255,0.5);
+    color: var(--text-color);
+    font-size: 2rem;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.slider-nav.prev {
+    left: 1rem;
+}
+
+.slider-nav.next {
+    right: 1rem;
+}
+
+.featured-artist, .news {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+}
+
+.artist-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem; /* Reduce el espacio entre la imagen y la descripción */
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 1rem; /* Reduce el padding general */
+    flex-direction: row; /* Asegúrate de que la disposición siga siendo en fila */
+}
+
+.artist-card img {
+    width: auto; /* Para que la imagen respete la relación de aspecto original */
+    height: 200px; /* Establece una altura fija */
+    object-fit: contain; /* Asegúrate de que la imagen se ajuste sin recortar */
+    border-radius: 4px; /* Un borde más suave */
+    flex-shrink: 0; /* Evita que la imagen se reduzca demasiado */
+}
+
+.artist-info {
+    flex: 1; /* Permite que el texto tome el espacio restante */
+    padding: 0.5rem; /* Reduce el padding interno para más espacio */
+}
+
+.artist-info h3 {
+    font-size: 1.25rem; /* Reduce ligeramente el tamaño de los títulos */
+    margin-bottom: 0.5rem;
+}
+
+.artist-info p {
+    font-size: 0.9rem; /* Reduce el tamaño del texto de la descripción */
+    margin-bottom: 0.5rem; /* Ajusta el margen inferior */
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.news-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.news-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.news-card h3, .news-card p {
+    padding: 0 1rem;
+}
+
+.news-card .btn {
+    margin: 1rem;
+}
+
+footer {
+    background-color: var(--secondary-color);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .nav-links, .nav-buttons {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .nav-links.active li {
+        margin: 0;
+        text-align: center;
+    }
+
+    .nav-links.active a {
+        display: block;
+        padding: 1rem;
+    }
+
+    .nav-buttons.active {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    .slider {
+        height: 300px;
+    }
+
+    .artist-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .artist-card img {
+        margin-bottom: 1rem;
+    }
+}
+
+/* ... (Estilos existentes) ... */
+
+/* Estilos para la página de catálogo */
+/* Estilos para la página de catálogo de guitarras */
+/* ... (Estilos existentes) ... */
+
+/* Estilos para la página de catálogo de guitarras */
+.catalog-header {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Aumentado de 300px a 400px */
+    overflow: hidden;
+  }
+  
+  .catalog-header-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%; /* Ajustado para mostrar una parte más alta de la imagen */
+  }
+  
+  .catalog-header h1 {
+    position: absolute;
+    top: 60%; /* Ajustado de 50% a 60% */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+  
+
+.catalog-layout {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.filters {
+    width: 250px;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    align-self: flex-start;
+}
+
+.filter-group {
+    margin-bottom: 1.5rem;
+}
+
+.filter-group h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-family: var(--body-font);
+}
+
+.guitar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    flex: 1;
+}
+
+.guitar-card {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.guitar-card:hover {
+    transform: translateY(-5px);
+}
+
+.guitar-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background-color: #f0f0f0;
+}
+
+.guitar-card-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.guitar-card h3 {
+    color: var(--primary-color);
+    font-family: var(--heading-font);
+    margin-bottom: 0.5rem;
+}
+
+.guitar-card p {
+    font-family: var(--body-font);
+    margin-bottom: 0.5rem;
+}
+
+.guitar-card .price {
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin-top: auto;
+}
+
+.favorite-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: transform 0.2s ease;
+}
+
+.favorite-btn:hover {
+    transform: scale(1.1);
+}
+
+.favorite-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--primary-color);
+}
+
+.favorite-btn.active svg {
+    fill: var(--primary-color);
+}
+
+@media (max-width: 1024px) {
+    .catalog-layout {
+        flex-direction: column;
+    }
+
+    .filters {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .guitar-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .guitar-card {
+        flex-direction: column;
+    }
+
+    .guitar-card img {
+        width: 100%;
+        height: 200px;
+    }
+}
+/* ... (Estilos existentes) ... */
+
+/* Estilos para la página de catálogo de bajos */
+.catalog-header {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Aumentado de 300px a 400px */
+    overflow: hidden;
+  }
+  
+  .catalog-header-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%; /* Ajustado para mostrar una parte más alta de la imagen */
+  }
+  
+  .catalog-header h1 {
+    position: absolute;
+    top: 60%; /* Ajustado de 50% a 60% */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+  
+.catalog-layout {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.filters {
+    width: 250px;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    align-self: flex-start;
+}
+
+.filter-group {
+    margin-bottom: 1.5rem;
+}
+
+.filter-group h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-family: var(--body-font);
+}
+
+.bass-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    flex: 1;
+}
+
+.bass-card {
+    display: flex;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    position: relative; /* Added for favorite button positioning */
+}
+
+.bass-card:hover {
+    transform: translateY(-5px);
+}
+
+.bass-card img {
+    width: 200px;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bass-card-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.bass-card h3 {
+    color: var(--primary-color);
+    font-family: var(--heading-font);
+    margin-bottom: 0.5rem;
+}
+
+.bass-card p {
+    font-family: var(--body-font);
+    margin-bottom: 0.5rem;
+}
+
+.bass-card .price {
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin-top: auto;
+}
+
+/* Removed .bass-card .btn styles as requested */
+
+
+.favorite-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: transform 0.2s ease;
+}
+
+.favorite-btn:hover {
+    transform: scale(1.1);
+}
+
+.favorite-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--primary-color);
+}
+
+.favorite-btn.active svg {
+    fill: var(--primary-color);
+}
+
+
+@media (max-width: 1024px) {
+    .catalog-layout {
+        flex-direction: column;
+    }
+
+    .filters {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .bass-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .horizontal-filters {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .horizontal-filters .filter-group {
+        margin-bottom: 1rem;
+    }
+
+    .bass-card {
+        flex-direction: column;
+    }
+
+    .bass-card img {
+        width: 100%;
+        height: 200px;
+    }
+}
+.bass-card {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    position: relative;
+  }
+
+  .bass-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .bass-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background-color: #f0f0f0;
+  }
+
+  .bass-card-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .bass-card h3 {
+    color: var(--primary-color);
+    font-family: var(--heading-font);
+    margin-bottom: 0.5rem;
+  }
+
+  .bass-card p {
+    font-family: var(--body-font);
+    margin-bottom: 0.5rem;
+  }
+
+  .bass-card .price {
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin-top: auto;
+  }
+
+  .favorite-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: transform 0.2s ease;
+  }
+
+  .favorite-btn:hover {
+    transform: scale(1.1);
+  }
+
+  .favorite-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--primary-color);
+  }
+
+  .favorite-btn.active svg {
+    fill: var(--primary-color);
+  }
+
+
+  /*detalles de guitarras*/
+  .product-info {
+  display: flex;
+  gap: 20px;
+  padding: 2rem;
+}
+
+.product-info img {
+  max-width: 600px;
+  max-height: 600px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+/*ESTILOS PARA ADIMINISTRADOR (panel)*/
+.admin-panel {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+  font-family: 'Oswald', sans-serif;
+}
+
+.form-section {
+  background-color: #1a1a1a;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 10px rgba(255, 102, 0, 0.3);
+}
+
+.form-section h2,
+.instrument-list h2 {
+  font-size: 1.5rem;
+  color: #ff6600;
+  margin-bottom: 1rem;
+}
+
+.form-section form {
+  display: grid;
+  gap: 1rem;
+}
+
+.form-section input,
+.form-section textarea {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background-color: #2a2a2a;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.instrument-list {
+  background-color: #111;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 102, 0, 0.2);
+}
+
+.admin-card {
+  background-color: #222;
+  color: #fff;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #ff6600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-card button.delete-btn {
+  background-color: #ff3300;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Oswald', sans-serif;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.admin-card button.delete-btn:hover {
+  background-color: #cc2900;
+}
+/*el bicho*/
+/*Los pinches detalles del producto*/
+.product-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+/*La perra cuenta gracias a dios*/
+
+.account-page {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: #1e1e1e;
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.account-page p {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+}
+
+.account-page .btn {
+  margin-top: 1rem;
+}
+
+
+.main-image img {
+  max-width: 500px;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  margin-bottom: 1.5rem;
+}
+
+.thumbnails {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.thumbnails img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.2s ease-in-out;
+}
+
+.thumbnails img:hover,
+.thumbnails img.active {
+  border: 2px solid #ff4500; /* Naranja vibrante estilo Distortion */
+}
+
+
+/* Estilos para los favoritos/cuenta */
+
+.favoritos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.fav-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  padding: 1rem;
+}
+
+.fav-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.fav-info h3 {
+  margin: 0.5rem 0;
+}
+
+
+  
+
+  /* Estilos para la página de detalles del producto */
+  
+.product-details {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.product-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.product-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+.product-header .price {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.product-content {
+    display: flex;
+    gap: 2rem;
+}
+
+.product-gallery {
+    flex: 1;
+}
+
+.main-image-container {
+    position: relative;
+    width: 100%;
+    padding-top: 100%; /* Esto crea un contenedor cuadrado */
+    margin-bottom: 1rem;
+}
+
+.main-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Esto asegura que la imagen se ajuste dentro del contenedor sin distorsionarse */
+    background-color: #f0f0f0;
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.nav-arrow.prev {
+    left: 10px;
+}
+
+.nav-arrow.next {
+    right: 10px;
+}
+
+.thumbnail-gallery {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+}
+
+.thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.thumbnail:hover,
+.thumbnail.active {
+    opacity: 0.8;
+}
+
+.product-info {
+    flex: 1;
+}
+
+/* ... (resto de los estilos existentes) ... */
+
+@media (max-width: 768px) {
+    .product-content {
+        flex-direction: column;
+    }
+
+    .product-gallery,
+    .product-info {
+        width: 100%;
+    }
+
+    .main-image-container {
+        padding-top: 75%; /* Ajusta la relación de aspecto para dispositivos móviles si es necesario */
+    }
+}
+
+/* DISTTRIBUIDOR EN DETALLES*/
+.distributor-info {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+.distributor-info h3 {
+    margin-bottom: 0.5rem;
+}
+
+.distributor-info ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.distributor-info li {
+    margin-bottom: 1rem;
+}

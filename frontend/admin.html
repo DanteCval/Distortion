@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel de Administrador - Distortion</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="sticky-header">
+    <nav>
+      <a href="home.html" class="logo">Distortion</a>
+      <ul class="nav-links">
+        <li><a href="catalog_guitars.html">Guitarras</a></li>
+        <li><a href="catalog_basses.html">Bajos</a></li>
+        <li><a href="featured.html">Artistas</a></li>
+        <li><a href="about.html">Acerca de</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="admin-panel">
+    <section class="form-section">
+      <h2>Agregar Instrumento</h2>
+      <form id="instrumentForm">
+        <input type="text" name="nombre" placeholder="Nombre" required>
+        <input type="text" name="marca" placeholder="Marca" required>
+        <input type="text" name="tipo" placeholder="Tipo (guitarra/bajo)" required>
+        <input type="number" name="cuerdas" placeholder="Cuerdas" required>
+        <input type="text" name="imagen" placeholder="Nombre de imagen (ej: esp_eclipse.png)" required>
+        <input type="number" name="precio" placeholder="Precio" required>
+        <textarea name="descripcion" placeholder="Descripción" required></textarea>
+        <button type="submit" class="btn btn-primary">Agregar</button>
+      </form>
+    </section>
+
+    <section class="instrument-list">
+      <h2>Instrumentos existentes</h2>
+      <div id="instrumentContainer"></div>
+    </section>
+  </main>
+
+  <button onclick="logout()" class="btn btn-secondary">Cerrar sesión</button>
+
+<script>
+  if (localStorage.getItem('adminAuth') !== 'true') {
+    window.location.href = 'admin-login.html';
+  }
+
+//Para proteger al pinche admin
+  const token = localStorage.getItem('token');
+  if (!token) {
+    alert('Acceso no autorizado');
+    window.location.href = 'login.html';
+  }
+</script>
+
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

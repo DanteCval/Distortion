@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+
+    <link rel="icon" type="image/png" href="imgs/icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distortion</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+
+
+
+<body id="top">
+    <header class="sticky-header">
+        <nav>
+            <a href="#top" class="logo">Distortion</a>
+            <ul class="nav-links">
+                <li><a href="catalog_guitars.html">Guitarras</a></li>
+                <li><a href="catalog_basses.html">Bajos</a></li>
+                <li><a href="featured.html">Artistas</a></li>
+                <li><a href="about.html">Acerca de</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="login.html">
+                <button class="btn btn-secondary">Iniciar sesión</button>
+                </a>
+            </div>
+            <button class="menu-toggle" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="slider">
+            <div class="slide active">
+                <img src="img/inicio_carousel2.jpg" alt="Nueva guitarra ESP">
+                <div class="slide-content">
+                    <h2>Nueva guitarra ESP</h2>
+                    <p>Descubre nuestro último modelo</p>
+                    <button class="catalog-button">Ver Catálogo</button>
+                    <button class="product-button">Ver Producto</button>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="img/inicio_carousel3.jpg" alt="Edición limitada">
+                <div class="slide-content">
+                    <h2>Edición limitada</h2>
+                    <p>Consíguela mientras haya existencias</p>
+                    <button class="catalog-button">Ver Catálogo</button>
+                    <button class="product-button">Ver Producto</button>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="img/inicio_carousel1.jpg" alt="Firma de artista">
+                <div class="slide-content">
+                    <h2>Artist Signature</h2>
+                    <p>Toca como tu músico favorito</p>
+                    <button class="catalog-button">Ver Catálogo</button>
+                    <button class="product-button">Ver Producto</button>
+                </div>
+            </div>
+            <button class="slider-nav prev" aria-label="Slide anterior">&lt;</button>
+            <button class="slider-nav next" aria-label="Siguiente slide">&gt;</button>
+        </section>
+        
+
+        <section class="featured-artist"></section>
+            <h2>Artista destacado</h2>
+            <div class="artist-card">
+                <img src="img/featured_artist.jpg" alt="John Doe, Artista destacado">
+                <div class="artist-info">
+                    <h3>John Doe</h3>
+                    <p>Guitarrista principal de Rock Band</p>
+                    <p>John Doe es un virtuoso de la guitarra con más de 20 años de experiencia en la industria musical. Conocido por su estilo único que fusiona el rock clásico con toques de blues y metal progresivo, John ha colaborado con numerosos artistas de renombre y ha lanzado cinco álbumes aclamados por la crítica. Su técnica impecable y su pasión por la innovación lo han convertido en uno de los guitarristas más respetados de su generación.</p>
+                    <p>Como embajador de ESP Guitars, John ha sido fundamental en el desarrollo de nuevos modelos que combinan la artesanía tradicional con tecnología de vanguardia. Su dedicación a la excelencia musical y su compromiso con la educación lo han llevado a realizar talleres y clases magistrales en todo el mundo, inspirando a la próxima generación de guitarristas.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="news">
+            <h2>Destacado</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <img src="https://kcjjsxmxrjqjxjwqjqvb.supabase.co/storage/v1/object/public/images/news1.jpg" alt="Nueva guitarra lanzada">
+                    <h3>Lanzamiento de nueva guitarra</h3>
+                    <p>Descubre nuestro último modelo con características y diseño mejorados.</p>
+                    <button class="btn btn-secondary">Leer más</button>
+                </article>
+                <article class="news-card">
+                    <img src="https://kcjjsxmxrjqjxjwqjqvb.supabase.co/storage/v1/object/public/images/news2.jpg" alt="Gira mundial anunciada">
+                    <h3>Gira mundial anunciada</h3>
+                    <p>Nuestro artista destacado anuncia fechas para su próxima gira mundial.</p>
+                    <button class="btn btn-secondary">Leer más</button>
+                </article>
+                <article class="news-card">
+                    <img src="https://kcjjsxmxrjqjxjwqjqvb.supabase.co/storage/v1/object/public/images/news3.jpg" alt="Taller de guitarra">
+                    <h3>Taller de guitarra</h3>
+                    <p>Únete a nuestro próximo taller de guitarra y mejora tus habilidades.</p>
+                    <button class="btn btn-secondary">Leer más</button>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 ESP Guitars Clone. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+
+    <script>
+    // Este pinche script es para ver el estado de login
+  const email = localStorage.getItem('email');
+
+  if (email) {
+    const nav = document.querySelector('.nav-buttons');
+    const userIcon = document.createElement('a');
+    userIcon.href = 'cuenta.html'; // crea esta página si quieres
+    userIcon.innerHTML = `👤 ${email}`;
+    userIcon.classList.add('user-icon');
+    nav.appendChild(userIcon);
+  }
+</script>
+</body>
+</html>
