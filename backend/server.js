@@ -14,10 +14,7 @@ app.use(bodyParser.json());
 app.use('/api/auth', authRoutes);
 
 // Conexión a MongoDB
-mongoose.connect('mongodb://localhost:27017/catalogo', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
+mongoose.connect(process.env.MONGO_URI).then(() => {
   console.log('Conectado a MongoDB');
   app.listen(PORT, () => console.log(`Servidor en puerto ${PORT}`));
 }).catch(err => console.error(err));
