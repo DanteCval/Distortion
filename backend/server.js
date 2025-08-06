@@ -14,10 +14,14 @@ app.use(bodyParser.json());
 app.use('/api/auth', authRoutes);
 
 // Conexión a MongoDB
-mongoose.connect(process.env.MONGO_URI).then(() => {
-  console.log('Conectado a MongoDB');
-  app.listen(PORT, () => console.log(`Servidor en puerto ${PORT}`));
-}).catch(err => console.error(err));
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/catalogo';
+
+mongoose.connect(MONGO_URI, { dbName: 'railway' })
+  .then(() => {
+    console.log('Conectado a MongoDB');
+    app.listen(PORT, () => console.log(`Servidor en puerto ${PORT}`));
+  })
+  .catch(err => console.error(err));
 
 const instrumentRoutes = require('./routes/instrumentRoutes');
 app.use('/api/instrumentos', instrumentRoutes);
