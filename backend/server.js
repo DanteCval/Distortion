@@ -7,6 +7,13 @@ const authRoutes = require('./routes/auth');
 const app = express();
 const PORT = 3000;
 
+// SERVIR FRONTEND
+app.use(express.static(path.join(__dirname, '../frontend')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/home.html'));
+});
+
 // Middlewares
 app.use(cors()); // ← AÑADIDO
 app.use(express.json()); // 👈 necesario para leer req.body
