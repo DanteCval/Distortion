@@ -1,5 +1,7 @@
 const container = document.getElementById('product-details');
-const API_URL = 'http://localhost:3000/api/instrumentos';
+const API_URL = window.location.hostname.includes('localhost')
+  ? 'http://localhost:3000/api/instrumentos'
+  : 'https://distortion-production.up.railway.app/api/instrumentos';
 
 // Extrae el ID del producto desde la URL
 const params = new URLSearchParams(window.location.search);
