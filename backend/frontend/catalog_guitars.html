@@ -2,27 +2,34 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <!-- icono del sitio -->
     <link rel="icon" type="image/png" href="img/icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Guitarras - Distortion</title>
+    <!-- hoja de estilos principal -->
     <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
+    <!-- encabezado fijo con navegación -->
     <header class="sticky-header">
         <nav>
+            <!-- logo principal -->
             <a href="home.html" class="logo">Distortion</a>
+            <!-- menú de navegación -->
             <ul class="nav-links">
                 <li><a href="catalog_guitars.html">Guitarras</a></li>
                 <li><a href="catalog_basses.html">Bajos</a></li>
                 <li><a href="featured.html">Artistas</a></li>
                 <li><a href="about.html">Acerca de</a></li>
             </ul>
+            <!-- botón de inicio de sesión -->
             <div class="nav-buttons">
                 <a href="login.html">
                 <button class="btn btn-secondary">Iniciar sesión</button>
                 </a>
             </div>
+            <!-- botón de menú para móviles -->
             <button class="menu-toggle" aria-label="Abrir menú">
                 <span></span>
                 <span></span>
@@ -31,15 +38,20 @@
         </nav>
     </header>
 
+    <!-- contenido principal del catálogo -->
     <main class="catalog-page">
+        <!-- cabecera del catálogo con imagen y título -->
         <div class="catalog-header">
             <img src="img/top_catalog_guitars.jpg" alt="Colección de guitarras" class="catalog-header-image">
             <h1>G U I T A R R A S</h1>
         </div>
         
+        <!-- layout principal: filtros + grid de instrumentos -->
         <div class="catalog-layout">
+            <!-- panel lateral de filtros -->
             <aside class="filters">
                 <h2>Filtros</h2>
+                <!-- filtro por marca -->
                 <div class="filter-group">
                     <h3>Marca</h3>
                     <label><input type="checkbox" name="brand" value="Fender"> Fender</label>
@@ -49,12 +61,14 @@
                     <label><input type="checkbox" name="brand" value="ESP"> ESP</label>
 
                 </div>
+                <!-- filtro por número de cuerdas -->
                 <div class="filter-group">
                     <h3>Número de cuerdas</h3>
                     <label><input type="checkbox" name="strings" value="6"> 6 cuerdas</label>
                     <label><input type="checkbox" name="strings" value="7"> 7 cuerdas</label>
                     <label><input type="checkbox" name="strings" value="8"> 8 cuerdas</label>
                 </div>
+                <!-- filtro por tipo de guitarra -->
                 <div class="filter-group">
                     <h3>Tipo</h3>
                     <label><input type="checkbox" name="type" value="electric"> Eléctrica</label>
@@ -64,19 +78,22 @@
                 <button id="apply-filters" class="btn btn-primary">Aplicar filtros</button>
             </aside>
             
+            <!-- grid donde se muestran las guitarras -->
             <section class="guitar-grid">
                 <!-- Las tarjetas de guitarras se generarán dinámicamente con JavaScript -->
             </section>
         </div>
     </main>
 
+    <!-- pie de página -->
     <footer>
         <p>&copy; 2023 Distortion. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- script específico para el catálogo de guitarras -->
     <script src="js/catalog.js"></script>
     <script>
-    // Este pinche script es para ver el estado de login
+    // este pinche script es para ver el estado de login
   const email = localStorage.getItem('email');
 
   if (email) {

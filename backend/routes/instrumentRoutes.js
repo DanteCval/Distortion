@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 const Instrument = require('../models/Instrument');
 
-// GET todos los instrumentos
+// obtener todos los instrumentos
 router.get('/', async (req, res) => {
   const instrumentos = await Instrument.find();
   res.json(instrumentos);
 });
 
-// GET por ID
+// obtener un instrumento por su ID
 router.get('/:id', async (req, res) => {
   try {
     const instrumento = await Instrument.findById(req.params.id);
@@ -19,7 +19,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST nuevo instrumento (admin)
+// crear nuevo instrumento (para admin)
 router.post('/', async (req, res) => {
   const nuevo = new Instrument(req.body);
   try {
@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// DELETE instrumento (admin)
+// eliminar instrumento (para admin)
 router.delete('/:id', async (req, res) => {
   try {
     await Instrument.findByIdAndDelete(req.params.id);
@@ -40,4 +40,5 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// exportar las rutas
 module.exports = router;

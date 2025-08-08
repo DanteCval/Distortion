@@ -3,48 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <title>Mi Cuenta - Distortion</title>
+  <!-- hoja de estilos principal -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- encabezado fijo con navegación -->
   <header class="sticky-header">
     <nav>
+      <!-- logo principal -->
       <a href="home.html" class="logo">Distortion</a>
+      <!-- menú de navegación -->
       <ul class="nav-links">
         <li><a href="catalog_guitars.html">Guitarras</a></li>
         <li><a href="catalog_basses.html">Bajos</a></li>
         <li><a href="featured.html">Artistas</a></li>
         <li><a href="about.html">Acerca de</a></li>
       </ul>
+      <!-- contenedor para botones de navegación -->
       <div class="nav-buttons">
         <!-- Aquí aparecerá el ícono de usuario si está logueado -->
       </div>
     </nav>
   </header>
 
+  <!-- contenido principal de la cuenta -->
   <main class="account-page">
-    <!-- Aquí aparecerán los favoritos agregados -->
-<section id="favoritos-section">
-   <h2>Mis Favoritos</h2>
- <section id="favoritos-container" class="favoritos-grid"></section>
+    <!-- sección de favoritos del usuario -->
+    <section id="favoritos-section">
+       <h2>Mis Favoritos</h2>
+       <!-- contenedor donde se muestran los favoritos -->
+       <section id="favoritos-container" class="favoritos-grid"></section>
+    </section>
 
-</section>
-
-
-
+    <!-- información de la cuenta -->
     <h2>Mi Cuenta</h2>
     <div id="user-info"></div>
+    <!-- botón para cerrar sesión -->
     <button id="logout-btn" class="btn btn-secondary">Cerrar Sesión</button>
   </main>
+
 <script>
+  // cargar y mostrar favoritos al cargar la página
   document.addEventListener('DOMContentLoaded', () => {
     const favoritosContainer = document.getElementById('favoritos-container');
     let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
 
+    // si no hay favoritos, mostrar mensaje
     if (favoritos.length === 0) {
       favoritosContainer.innerHTML = '<p>No hay favoritos aún.</p>';
       return;
     }
 
+    // crear tarjetas para cada favorito
     favoritos.forEach(item => {
       const card = document.createElement('div');
       card.className = 'fav-card';
@@ -60,42 +70,39 @@
       favoritosContainer.appendChild(card);
     });
 
-    //  Este bloque va DENTRO del DOMContentLoaded
+    // evento para eliminar favoritos
     favoritosContainer.addEventListener('click', (e) => {
       if (e.target.classList.contains('btn-remove-fav')) {
         const idToRemove = e.target.dataset.id;
 
-        // Actualizamos el array de favoritos
+        // actualizamos el array de favoritos
         favoritos = favoritos.filter(fav => fav.id !== idToRemove);
 
-        // Guardamos el nuevo array
+        // guardamos el nuevo array
         localStorage.setItem('favoritos', JSON.stringify(favoritos));
 
-        // Volvemos a cargar la vista
+        // volvemos a cargar la vista
         location.reload();
       }
     });
   });
 
+  // manejar logout
   document.addEventListener('DOMContentLoaded', () => {
     const logoutBtn = document.getElementById('logout-btn');
 
     logoutBtn.addEventListener('click', () => {
-      // Borra la información de sesión del localStorage
+      // borra la información de sesión del localStorage
       localStorage.removeItem('user');      // si estás guardando datos del usuario
-      localStorage.removeItem('favoritos'); // opcional, si quieres limpiar favoritos también
+      localStorage.removeItem('favoritos'); // limpiar favoritos 
       sessionStorage.clear();
       localStorage.clear(); // si quieres eliminar todo
 
-      // Redirige al login o a home
+      // redirige al login o a home
       window.location.href = 'home.html';
     });
   });
 </script>
-
-
-</script>
-
 
 </body>
 </html>

@@ -2,26 +2,33 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <!-- icono del sitio -->
     <link rel="icon" type="image/png" href="img/icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Bajos - Distortion</title>
+    <!-- hoja de estilos principal -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- encabezado fijo con navegación -->
     <header class="sticky-header">
         <nav>
+            <!-- logo principal -->
             <a href="home.html" class="logo">Distortion</a>
+            <!-- menú de navegación -->
             <ul class="nav-links">
                 <li><a href="catalog_guitars.html">Guitarras</a></li>
                 <li><a href="catalog_basses.html">Bajos</a></li>
                 <li><a href="featured.html">Artistas</a></li>
                 <li><a href="about.html">Acerca de</a></li>
             </ul>
+            <!-- botón de inicio de sesión -->
             <div class="nav-buttons">
                 <a href="login.html">
                 <button class="btn btn-secondary">Iniciar sesión</button>
                 </a>
             </div>
+            <!-- botón de menú para móviles -->
             <button class="menu-toggle" aria-label="Abrir menú">
                 <span></span>
                 <span></span>
@@ -30,15 +37,20 @@
         </nav>
     </header>
 
+    <!-- contenido principal del catálogo -->
     <main class="catalog-page">
+        <!-- cabecera del catálogo con imagen y título -->
         <div class="catalog-header">
             <img src="img/top_catalog_basses.webp" alt="Colección de bajos" class="catalog-header-image">
             <h1>B A J O S</h1>
         </div>
         
+        <!-- layout principal: filtros + grid de instrumentos -->
         <div class="catalog-layout">
+            <!-- panel lateral de filtros -->
             <aside class="filters">
                 <h2>Filtros</h2>
+                <!-- filtro por marca -->
                 <div class="filter-group">
                     <h3>Marca</h3>
                     <label><input type="checkbox" name="brand" value="fender"> Fender</label>
@@ -46,12 +58,14 @@
                     <label><input type="checkbox" name="brand" value="ibanez"> Ibanez</label>
                     <label><input type="checkbox" name="brand" value="warwick"> Warwick</label>
                 </div>
+                <!-- filtro por número de cuerdas -->
                 <div class="filter-group">
                     <h3>Número de cuerdas</h3>
                     <label><input type="checkbox" name="strings" value="4"> 4 cuerdas</label>
                     <label><input type="checkbox" name="strings" value="5"> 5 cuerdas</label>
                     <label><input type="checkbox" name="strings" value="6"> 6 cuerdas</label>
                 </div>
+                <!-- filtro por tipo de bajo -->
                 <div class="filter-group">
                     <h3>Tipo</h3>
                     <label><input type="checkbox" name="type" value="signature"> Signature</label>
@@ -60,19 +74,22 @@
                 <button id="apply-filters" class="btn btn-primary">Aplicar filtros</button>
             </aside>
             
+            <!-- grid donde se muestran los bajos -->
             <section class="bass-grid">
                 <!-- Las tarjetas de bajos se generarán dinámicamente con JavaScript -->
             </section>
         </div>
     </main>
 
+    <!-- pie de página -->
     <footer>
         <p>&copy; 2023 Distortion. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- script específico para el catálogo de bajos -->
     <script src="js/catalog_basses.js"></script>
     <script>
-    // Este pinche script es para ver el estado de login
+    // este pinche script es para ver el estado de login
   const email = localStorage.getItem('email');
 
   if (email) {

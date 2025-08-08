@@ -3,21 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <title>Acceso Administrador</title>
+  <!-- estilos principales -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- contenedor principal del login -->
   <main class="login-admin">
     <h2>Panel de Administrador</h2>
+    
+    <!-- formulario de acceso -->
     <form id="adminLoginForm">
-  <input type="text" name="username" placeholder="Usuario" required>
-  <input type="password" name="password" placeholder="Contraseña" required>
-  <button type="submit">Ingresar</button>
-</form>
-<p id="loginMsg"></p>
+      <input type="text" name="username" placeholder="Usuario" required>
+      <input type="password" name="password" placeholder="Contraseña" required>
+      <button type="submit">Ingresar</button>
+    </form>
+    
+    <!-- mensaje de respuesta del login -->
+    <p id="loginMsg"></p>
+    
+    <!-- mensaje de error adicional (duplicado, probablemente se puede eliminar uno) -->
     <div id="login-msg" style="color: red; margin-top: 10px;"></div>
   </main>
 
+  <!-- script para manejar el login -->
   <script src="js/admin-login.js"></script>
-
 </body>
 </html>

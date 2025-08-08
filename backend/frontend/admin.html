@@ -3,12 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Panel de Administrador - Distortion</title>
+  <!-- estilos principales -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- encabezado con navegación -->
   <header class="sticky-header">
     <nav>
+      <!-- logo principal -->
       <a href="home.html" class="logo">Distortion</a>
+      <!-- menú de navegación -->
       <ul class="nav-links">
         <li><a href="catalog_guitars.html">Guitarras</a></li>
         <li><a href="catalog_basses.html">Bajos</a></li>
@@ -18,7 +22,9 @@
     </nav>
   </header>
 
+  <!-- contenido principal del panel -->
   <main class="admin-panel">
+    <!-- sección del formulario para agregar instrumentos -->
     <section class="form-section">
       <h2>Agregar Instrumento</h2>
       <form id="instrumentForm">
@@ -33,20 +39,23 @@
       </form>
     </section>
 
+    <!-- sección que muestra los instrumentos existentes -->
     <section class="instrument-list">
       <h2>Instrumentos existentes</h2>
       <div id="instrumentContainer"></div>
     </section>
   </main>
 
+  <!-- botón para cerrar sesión -->
   <button onclick="logout()" class="btn btn-secondary">Cerrar sesión</button>
 
 <script>
+  // verificar si el admin está autenticado
   if (localStorage.getItem('adminAuth') !== 'true') {
     window.location.href = 'admin-login.html';
   }
 
-//Para proteger al pinche admin
+  // para proteger al pinche admin
   const token = localStorage.getItem('token');
   if (!token) {
     alert('Acceso no autorizado');
@@ -54,7 +63,7 @@
   }
 </script>
 
-
+  <!-- script principal del panel de administrador -->
   <script src="js/admin.js"></script>
 </body>
 </html>
