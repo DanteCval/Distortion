@@ -6,6 +6,7 @@ const path = require('path');
 const authRoutes = require('./routes/auth');
 const instrumentRoutes = require('./routes/instrumentRoutes');
 
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 

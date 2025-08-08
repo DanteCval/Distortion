@@ -60,7 +60,7 @@
       favoritosContainer.appendChild(card);
     });
 
-    // 💥 Este bloque va DENTRO del DOMContentLoaded
+    //  Este bloque va DENTRO del DOMContentLoaded
     favoritosContainer.addEventListener('click', (e) => {
       if (e.target.classList.contains('btn-remove-fav')) {
         const idToRemove = e.target.dataset.id;
@@ -74,6 +74,21 @@
         // Volvemos a cargar la vista
         location.reload();
       }
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const logoutBtn = document.getElementById('logout-btn');
+
+    logoutBtn.addEventListener('click', () => {
+      // Borra la información de sesión del localStorage
+      localStorage.removeItem('user');      // si estás guardando datos del usuario
+      localStorage.removeItem('favoritos'); // opcional, si quieres limpiar favoritos también
+      sessionStorage.clear();
+      localStorage.clear(); // si quieres eliminar todo
+
+      // Redirige al login o a home
+      window.location.href = 'home.html';
     });
   });
 </script>

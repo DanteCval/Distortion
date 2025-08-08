@@ -1,6 +1,9 @@
 const form = document.getElementById('loginForm');
 const messageDiv = document.getElementById('message');
-const API_URL = 'http://localhost:3000/api/auth';
+const API_URL = window.location.hostname.includes('localhost')
+    ? 'http://localhost:3000/api/auth'
+    : 'https://distortion-production.up.railway.app/api/auth';
+
 
 function showMessage(msg, isError = false) {
   messageDiv.textContent = msg;
