@@ -1,3 +1,5 @@
+//IGNORAR. Se trara de un archivo para probar cómo se ven en la página los datos de productos. 
+// No incluido en el MVP
 const productData = {
     "1": {
         id: "1",

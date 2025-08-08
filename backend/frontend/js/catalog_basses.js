@@ -1,3 +1,4 @@
+// Cuando carga la página
 document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
@@ -5,20 +6,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const applyFiltersBtn = document.getElementById('apply-filters');
     const guitarGrid = document.querySelector('.bass-grid');
 
+    // Menu hamburguesa
     menuToggle.addEventListener('click', () => {
         navLinks.classList.toggle('active');
         navButtons.classList.toggle('active');
     });
 
+    // URL de la API según el entorno
     const API_URL = window.location.hostname.includes('localhost')
         ? 'http://localhost:3000/api/instrumentos'
         : 'https://distortion-production.up.railway.app/api/instrumentos';
 
     let basses = [];
 
+    // Obtiene los bajos de la API
     fetch(API_URL)
         .then(res => res.json())
         .then(data => {
+            // Filtra solo los bajos y mapea los datos
             basses = data
                 .filter(inst => inst.tipo.toLowerCase() === 'bajo')
                 .map(inst => ({
@@ -37,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             guitarGrid.innerHTML = '<p>Error al cargar el catálogo.</p>';
         });
 
+    // Función para mostrar los bajos en la página
     function renderBasses(bassesToRender) {
         guitarGrid.innerHTML = '';
         bassesToRender.forEach(bass => {
@@ -61,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>Tipo: ${bass.type}</p>
                 </div>
             `;
+            // Redirige al detalle cuando se hace click en la tarjeta
             bassCard.addEventListener('click', (e) => {
                 if (!e.target.closest('.fav-btn')) {
                     window.location.href = `product-details.html?id=${bass._id}`;
@@ -70,17 +77,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Maneja los clicks en los botones de favoritos
     guitarGrid.addEventListener('click', (e) => {
         const favBtn = e.target.closest('.fav-btn');
         if (favBtn) {
             const id = favBtn.dataset.id;
             const nombre = favBtn.dataset.name;
 
+            // Busca el bajo seleccionado
             const selected = basses.find(b => b._id === id);
             if (!selected) return;
 
+            // Obtiene favoritos existentes
             let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
 
+            // Verifica si ya está en favoritos
             if (!favoritos.find(fav => fav.id === id)) {
                 favoritos.push({
                     id: selected._id,
@@ -98,11 +109,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Aplica los filtros seleccionados
     function applyFilters() {
         const selectedBrands = Array.from(document.querySelectorAll('input[name="brand"]:checked')).map(input => input.value);
         const selectedStrings = Array.from(document.querySelectorAll('input[name="strings"]:checked')).map(input => input.value);
         const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(input => input.value);
 
+        // Filtra los bajos según criterios seleccionados
         const filteredBasses = basses.filter(bass =>
             (selectedBrands.length === 0 || selectedBrands.includes(bass.brand)) &&
             (selectedStrings.length === 0 || selectedStrings.includes(String(bass.strings))) &&
@@ -114,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     applyFiltersBtn.addEventListener('click', applyFilters);
 
+    // Scroll suave al hacer click en el logo
     const logo = document.querySelector('.logo');
     logo.addEventListener('click', (e) => {
         e.preventDefault();

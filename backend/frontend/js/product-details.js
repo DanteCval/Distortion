@@ -1,15 +1,19 @@
 const container = document.getElementById('product-details');
+
+// URL de la API según el entorno
 const API_URL = window.location.hostname.includes('localhost')
   ? 'http://localhost:3000/api/instrumentos'
   : 'https://distortion-production.up.railway.app/api/instrumentos';
 
-// Extrae el ID del producto desde la URL
+// Obtiene el ID del producto desde la URL
 const params = new URLSearchParams(window.location.search);
 const id = params.get('id');
 
+// Verifica que se haya proporcionado un ID
 if (!id) {
   container.innerHTML = '<p>Error: No se especificó el instrumento.</p>';
 } else {
+  // Obtiene los datos del instrumento específico
   fetch(`${API_URL}/${id}`)
     .then(response => {
       if (!response.ok) {
@@ -18,6 +22,7 @@ if (!id) {
       return response.json();
     })
     .then(data => {
+      // Muestra la información del instrumento
       container.innerHTML = `
         <section class="product-info">
           <img src="img/productos/${data.imagen}" alt="${data.nombre}">
@@ -33,7 +38,7 @@ if (!id) {
       `;
     })
     .catch(err => {
+      // Muestra error si no se puede cargar
       container.innerHTML = `<p>Error al cargar el instrumento: ${err.message}</p>`;
     });
 }
-

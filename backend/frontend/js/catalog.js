@@ -1,3 +1,4 @@
+// Cuando carga la página
 document.addEventListener('DOMContentLoaded', () => {
   const menuToggle = document.querySelector('.menu-toggle');
   const navLinks = document.querySelector('.nav-links');
@@ -6,25 +7,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const guitarGrid = document.querySelector('.guitar-grid');
   const logo = document.querySelector('.logo');
 
+  // URL de la API según el entorno
   const API_URL = window.location.hostname.includes('localhost')
     ? 'http://localhost:3000/api/instrumentos'
     : 'https://distortion-production.up.railway.app/api/instrumentos';
 
   let guitars = [];
 
+  // Menu hamburguesa
   menuToggle.addEventListener('click', () => {
     navLinks.classList.toggle('active');
     navButtons.classList.toggle('active');
   });
 
+  // Scroll suave al hacer click en el logo
   logo.addEventListener('click', (e) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
+  // Obtiene las guitarras de la API
   fetch(API_URL)
     .then(res => res.json())
     .then(data => {
+      // Filtra solo guitarras y mapea los datos
       guitars = data
         .filter(inst => inst.tipo.toLowerCase() === 'guitarra')
         .map(inst => ({
@@ -42,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
       guitarGrid.innerHTML = '<p>Error al cargar el catálogo.</p>';
     });
 
+  // Función para mostrar las guitarras en la página
   function renderGuitars(guitarsToRender) {
     guitarGrid.innerHTML = '';
     guitarsToRender.forEach(guitar => {
@@ -69,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
 
+      // Redirige al detalle cuando se hace click en la tarjeta
       guitarCard.addEventListener('click', (e) => {
         if (!e.target.closest('.fav-btn')) {
           window.location.href = `product-details.html?id=${guitar._id}`;
@@ -79,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Maneja los clicks en los botones de favoritos
   guitarGrid.addEventListener('click', (e) => {
     const favBtn = e.target.closest('.fav-btn');
     if (favBtn) {
@@ -86,8 +95,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const selected = guitars.find(g => g._id === id);
       if (!selected) return;
 
+      // Obtiene favoritos existentes
       let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
 
+      // Verifica si ya está en favoritos
       if (!favoritos.find(fav => fav.id === id)) {
         favoritos.push({
           id: selected._id,
@@ -105,11 +116,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Aplica los filtros seleccionados
   function applyFilters() {
     const selectedBrands = Array.from(document.querySelectorAll('input[name="brand"]:checked')).map(input => input.value);
     const selectedStrings = Array.from(document.querySelectorAll('input[name="strings"]:checked')).map(input => input.value);
     const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(input => input.value);
 
+    // Filtra las guitarras según criterios seleccionados
     const filteredGuitars = guitars.filter(guitar =>
       (selectedBrands.length === 0 || selectedBrands.includes(guitar.brand)) &&
       (selectedStrings.length === 0 || selectedStrings.includes(String(guitar.strings))) &&

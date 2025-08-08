@@ -1,13 +1,17 @@
+// Espera a que cargue el DOM
 document.addEventListener('DOMContentLoaded', () => {
   const API_URL = 'http://localhost:3000/api/instrumentos';
   const form = document.getElementById('instrumentForm');
   const lista = document.getElementById('instrumentContainer');
 
+  // Función para obtener y mostrar todos los instrumentos
   function cargarInstrumentos() {
     fetch(API_URL)
       .then(res => res.json())
       .then(data => {
+        // Limpia la lista
         lista.innerHTML = '';
+        // Crea una tarjeta para cada instrumento
         data.forEach(inst => {
           const div = document.createElement('div');
           div.className = 'admin-card';
@@ -21,14 +25,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       })
       .catch(err => {
+        // Muestra error si no se pueden cargar
         lista.innerHTML = '<p>Error al cargar instrumentos.</p>';
         console.error(err);
       });
   }
 
+  // Maneja el envío del formulario para agregar instrumentos
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    // Obtiene los datos del formulario
     const nuevoInstrumento = {
       nombre: form.nombre.value.trim(),
       tipo: form.tipo.value.trim().toLowerCase(), // "guitarra" o "bajo"
@@ -39,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
       precio: Number(form.precio.value)
     };
 
+    // Envía el nuevo instrumento a la API
     fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -49,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return res.json();
       })
       .then(() => {
+        // Limpia el formulario y recarga la lista
         form.reset();
         cargarInstrumentos();
       })
@@ -58,10 +67,12 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   });
 
+  // Maneja los clicks en los botones de eliminar
   lista.addEventListener('click', (e) => {
     if (e.target.classList.contains('delete-btn')) {
       const id = e.target.dataset.id;
       if (confirm('¿Estás seguro de eliminar este instrumento?')) {
+        // Elimina el instrumento
         fetch(`${API_URL}/${id}`, {
           method: 'DELETE'
         })
@@ -77,10 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Carga los instrumentos al iniciar
   cargarInstrumentos();
 });
 
-// 🔒 Bloqueo simple
+// Verifica que el usuario esté autenticado
 if (localStorage.getItem('adminAuth') !== 'true') {
   window.location.href = 'admin_login.html';
 }
