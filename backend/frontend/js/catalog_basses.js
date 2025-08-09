@@ -111,19 +111,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Aplica los filtros seleccionados
     function applyFilters() {
-        const selectedBrands = Array.from(document.querySelectorAll('input[name="brand"]:checked')).map(input => input.value);
-        const selectedStrings = Array.from(document.querySelectorAll('input[name="strings"]:checked')).map(input => input.value);
-        const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(input => input.value);
+    const selectedBrands = Array.from(document.querySelectorAll('input[name="brand"]:checked'))
+        .map(input => input.value.toLowerCase());
 
-        // Filtra los bajos según criterios seleccionados
-        const filteredBasses = basses.filter(bass =>
-            (selectedBrands.length === 0 || selectedBrands.includes(bass.brand)) &&
-            (selectedStrings.length === 0 || selectedStrings.includes(String(bass.strings))) &&
-            (selectedTypes.length === 0 || selectedTypes.includes(bass.type))
-        );
+    const selectedStrings = Array.from(document.querySelectorAll('input[name="strings"]:checked'))
+        .map(input => String(input.value));
 
-        renderBasses(filteredBasses);
-    }
+    const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked'))
+        .map(input => input.value.toLowerCase());
+
+    const filteredBasses = basses.filter(bass =>
+        (selectedBrands.length === 0 || selectedBrands.includes(bass.brand.toLowerCase())) &&
+        (selectedStrings.length === 0 || selectedStrings.includes(String(bass.strings))) &&
+        (selectedTypes.length === 0 || selectedTypes.includes(bass.type.toLowerCase()))
+    );
+
+    renderBasses(filteredBasses);
+}
+
 
     applyFiltersBtn.addEventListener('click', applyFilters);
 
