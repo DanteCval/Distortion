@@ -1,141 +1,126 @@
-// Cuando carga la página
+// js/catalog_basses.js
+import { saveInstruments, getAllInstruments } from './db.js';
+
+const API_URL = window.location.hostname.includes('localhost')
+  ? 'http://localhost:3000/api/instrumentos'
+  : 'https://distortion-production.up.railway.app/api/instrumentos';
+
+let allBasses = [];
+
 document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    const navButtons = document.querySelector('.nav-buttons');
-    const applyFiltersBtn = document.getElementById('apply-filters');
-    const guitarGrid = document.querySelector('.bass-grid');
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  const navButtons = document.querySelector('.nav-buttons');
+  const applyFiltersBtn = document.getElementById('apply-filters');
+  const bassGrid = document.querySelector('.bass-grid');
+  const logo = document.querySelector('.logo');
 
-    // Menu hamburguesa
+  // Menú hamburguesa
+  if (menuToggle) {
     menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        navButtons.classList.toggle('active');
+      navLinks?.classList.toggle('active');
+      navButtons?.classList.toggle('active');
     });
+  }
 
-    // URL de la API según el entorno
-    const API_URL = window.location.hostname.includes('localhost')
-        ? 'http://localhost:3000/api/instrumentos'
-        : 'https://distortion-production.up.railway.app/api/instrumentos';
-
-    let basses = [];
-
-    // Obtiene los bajos de la API
-    fetch(API_URL)
-        .then(res => res.json())
-        .then(data => {
-            // Filtra solo los bajos y mapea los datos
-            basses = data
-                .filter(inst => inst.tipo.toLowerCase() === 'bajo')
-                .map(inst => ({
-                    _id: inst._id,
-                    name: inst.nombre,
-                    brand: inst.marca,
-                    type: inst.tipo,
-                    strings: inst.cuerdas,
-                    image: inst.imagen
-                }));
-
-            renderBasses(basses);
-        })
-        .catch(err => {
-            console.error('Error cargando instrumentos:', err);
-            guitarGrid.innerHTML = '<p>Error al cargar el catálogo.</p>';
-        });
-
-    // Función para mostrar los bajos en la página
-    function renderBasses(bassesToRender) {
-        guitarGrid.innerHTML = '';
-        bassesToRender.forEach(bass => {
-            const bassCard = document.createElement('div');
-            bassCard.className = 'guitar-card';
-            bassCard.innerHTML = `
-                <img src="img/productos/${bass.image}" alt="${bass.name}">
-                <button class="fav-btn" data-id="${bass._id}" data-name="${bass.name}" aria-label="Añadir a favoritos">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
-                         viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
-                         class="feather feather-heart">
-                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 
-                         5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 
-                         1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                    </svg>
-                </button>
-                <div class="guitar-card-content">
-                    <h3>${bass.name}</h3>
-                    <p>Marca: ${bass.brand}</p>
-                    <p>Cuerdas: ${bass.strings}</p>
-                    <p>Tipo: ${bass.type}</p>
-                </div>
-            `;
-            // Redirige al detalle cuando se hace click en la tarjeta
-            bassCard.addEventListener('click', (e) => {
-                if (!e.target.closest('.fav-btn')) {
-                    window.location.href = `product-details.html?id=${bass._id}`;
-                }
-            });
-            guitarGrid.appendChild(bassCard);
-        });
-    }
-
-    // Maneja los clicks en los botones de favoritos
-    guitarGrid.addEventListener('click', (e) => {
-        const favBtn = e.target.closest('.fav-btn');
-        if (favBtn) {
-            const id = favBtn.dataset.id;
-            const nombre = favBtn.dataset.name;
-
-            // Busca el bajo seleccionado
-            const selected = basses.find(b => b._id === id);
-            if (!selected) return;
-
-            // Obtiene favoritos existentes
-            let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
-
-            // Verifica si ya está en favoritos
-            if (!favoritos.find(fav => fav.id === id)) {
-                favoritos.push({
-                    id: selected._id,
-                    nombre: selected.name,
-                    imagen: `img/productos/${selected.image}`,
-                    marca: selected.brand,
-                    cuerdas: selected.strings
-                });
-                localStorage.setItem('favoritos', JSON.stringify(favoritos));
-                alert('Añadido a favoritos');
-                favBtn.classList.add('active');
-            } else {
-                alert('Ya está en favoritos');
-            }
-        }
+  // Scroll suave con el logo
+  if (logo) {
+    logo.addEventListener('click', e => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+  }
 
-    // Aplica los filtros seleccionados
-    function applyFilters() {
-    const selectedBrands = Array.from(document.querySelectorAll('input[name="brand"]:checked'))
-        .map(input => input.value.toLowerCase());
+  // Carga inicial de bajos
+  loadBasses(bassGrid);
 
-    const selectedStrings = Array.from(document.querySelectorAll('input[name="strings"]:checked'))
-        .map(input => String(input.value));
+  // Aplicar filtros
+  if (applyFiltersBtn) {
+    applyFiltersBtn.addEventListener('click', () => {
+      applyFilters(bassGrid);
+    });
+  }
+});
 
-    const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked'))
-        .map(input => input.value.toLowerCase());
+async function loadBasses(bassGrid) {
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error('Error en la API');
 
-    const filteredBasses = basses.filter(bass =>
-        (selectedBrands.length === 0 || selectedBrands.includes(bass.brand.toLowerCase())) &&
-        (selectedStrings.length === 0 || selectedStrings.includes(String(bass.strings))) &&
-        (selectedTypes.length === 0 || selectedTypes.includes(bass.type.toLowerCase()))
-    );
+    const data = await res.json();
+    // Guardamos TODO en IndexedDB
+    await saveInstruments(data);
 
-    renderBasses(filteredBasses);
+    // Solo bajos para esta página
+    allBasses = data.filter(item => item.tipo === 'bajo');
+  } catch (err) {
+    console.warn('Fallo la red, usando IndexedDB...', err);
+    const cached = await getAllInstruments();
+    allBasses = cached.filter(item => item.tipo === 'bajo');
+  }
+
+  renderBasses(bassGrid, allBasses);
 }
 
+function renderBasses(bassGrid, list) {
+  if (!bassGrid) return;
 
-    applyFiltersBtn.addEventListener('click', applyFilters);
+  bassGrid.innerHTML = '';
 
-    // Scroll suave al hacer click en el logo
-    const logo = document.querySelector('.logo');
-    logo.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (!list || list.length === 0) {
+    bassGrid.innerHTML = '<p>No se encontraron bajos para mostrar.</p>';
+    return;
+  }
+
+  list.forEach(bass => {
+    const card = document.createElement('div');
+    card.className = 'guitar-card'; // reutilizas el estilo
+    card.dataset.id = bass._id;
+
+    const imageSrc = `img/productos/${bass.imagen}`;
+
+    card.innerHTML = `
+      <img src="${imageSrc}" alt="${bass.nombre}">
+      <div class="guitar-card-content">
+        <h3>${bass.nombre}</h3>
+        <p>Marca: ${bass.marca}</p>
+        <p>Cuerdas: ${bass.cuerdas}</p>
+        <p>Tipo: ${bass.tipo}</p>
+      </div>
+    `;
+
+    card.addEventListener('click', () => {
+      window.location.href = `product-details.html?id=${bass._id}`;
     });
-});
+
+    bassGrid.appendChild(card);
+  });
+}
+
+function applyFilters(bassGrid) {
+  const brandInputs = document.querySelectorAll('input[name="brand"]:checked');
+  const stringInputs = document.querySelectorAll('input[name="strings"]:checked');
+  const typeInputs = document.querySelectorAll('input[name="type"]:checked');
+
+  const selectedBrands = Array.from(brandInputs).map(i => i.value.toLowerCase());
+  const selectedStrings = Array.from(stringInputs).map(i => i.value);
+  const selectedTypes = Array.from(typeInputs).map(i => i.value.toLowerCase());
+
+  const filtered = allBasses.filter(bass => {
+    const marcaOk =
+      selectedBrands.length === 0 ||
+      selectedBrands.includes(String(bass.marca).toLowerCase());
+
+    const cuerdasOk =
+      selectedStrings.length === 0 ||
+      selectedStrings.includes(String(bass.cuerdas));
+
+    const tipoOk =
+      selectedTypes.length === 0 ||
+      selectedTypes.includes(String(bass.tipo).toLowerCase());
+
+    return marcaOk && cuerdasOk && tipoOk;
+  });
+
+  renderBasses(bassGrid, filtered);
+}
