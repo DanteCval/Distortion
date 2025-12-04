@@ -3,11 +3,18 @@
 <head>
 
 
-    <link rel="icon" type="image/png" href="imgs/icon.png">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Distortion</title>
-    <link rel="stylesheet" href="css/style.css">
+   <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Distortion | Catálogo de guitarras y bajos</title>
+
+<!-- Icono y manifest -->
+<link rel="icon" type="image/png" href="img/icon.png">
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#000000">
+
+<link rel="stylesheet" href="css/style.css">
+
 </head>
 
 
@@ -125,6 +132,20 @@
     userIcon.innerHTML = `👤 ${email}`;
     userIcon.classList.add('user-icon');
     nav.appendChild(userIcon);
+  }
+  
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./service-worker.js')
+        .then(reg => {
+          console.log('Service Worker registrado', reg.scope);
+        })
+        .catch(err => {
+          console.error('Error al registrar el Service Worker', err);
+        });
+    });
   }
 </script>
 </body>
