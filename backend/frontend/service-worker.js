@@ -94,3 +94,40 @@ async function networkFirst(request) {
     return new Response('Sin conexión', { status: 503, statusText: 'Offline' });
   }
 }
+
+// Manejo de clics en notificaciones
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+
+  const action = event.action;
+
+  if (action === 'open-catalog') {
+    event.waitUntil(
+      clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clientList => {
+        for (const client of clientList) {
+          if ('focus' in client) {
+            client.navigate('./catalog_guitars.html');
+            return client.focus();
+          }
+        }
+        if (clients.openWindow) {
+          return clients.openWindow('./catalog_guitars.html');
+        }
+      })
+    );
+  } else {
+    // Click normal en la notificación
+    event.waitUntil(
+      clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clientList => {
+        for (const client of clientList) {
+          if ('focus' in client) {
+            return client.focus();
+          }
+        }
+        if (clients.openWindow) {
+          return clients.openWindow('./home.html');
+        }
+      })
+    );
+  }
+});

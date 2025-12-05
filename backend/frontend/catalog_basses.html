@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <!-- icono del sitio -->
-    <link rel="icon" type="image/png" href="img/icon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Bajos - Distortion</title>
-    <!-- hoja de estilos principal -->
-    <link rel="stylesheet" href="css/style.css">
+   <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Catálogo de Bajos</title>
+
+<!-- Icono y manifest -->
+<link rel="icon" type="image/png" href="img/icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#000000">
+
+<link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
     <!-- encabezado fijo con navegación -->
@@ -102,5 +107,7 @@
     nav.appendChild(userIcon);
   }
 </script>
+<script type="module" src="js/notifications.js"></script> <!-- para notificaciones push -->
+
 </body>
 </html>

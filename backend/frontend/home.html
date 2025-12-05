@@ -119,7 +119,8 @@
         <p>&copy; 2023 ESP Guitars Clone. Todos los derechos reservados.</p>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script type="module" src="js/script.js"></script>
+
 
     <script>
     // Este pinche script es para ver el estado de login
@@ -135,6 +136,8 @@
   }
   
 </script>
+<script type="module" src="js/notifications.js"></script> <!-- para notificaciones push -->
+
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
