@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (catalogButton) {
             catalogButton.addEventListener('click', () => {
-                window.location.href = 'catalog_basses.html';
+                window.location.href = 'catalog_guitars.html';
             });
         }
 
